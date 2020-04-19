@@ -1,7 +1,11 @@
+## DeEn modified version it's just changed IP API server and Remove the update version checker.
+If you need to install the latest version of TorGhost 
+please install from the original version https://github.com/SusmithKrishnan/torghost.git
+
 ## What is TorGhost ?
 TorGhost is an anonymization script. TorGhost redirects all internet traffic through SOCKS5 tor proxy. DNS requests are also redirected via tor, thus preventing DNSLeak. The scripts also disables unsafe packets exiting the system. Some packets like ping request can compromise your identity.
 
-## Build and install from source
+## Build and install from source (Original)  
 `git clone https://github.com/SusmithKrishnan/torghost.git`
 
 `cd torghost`
