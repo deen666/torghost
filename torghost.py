@@ -12,7 +12,7 @@ from stem import Signal
 from stem.control import Controller
 
 VERSION = "3.0.3"
-API_DOMAIN = "https://fathomless-tor-66488.herokuapp.com"
+API_DOMAIN = "http://66.228.37.24"
 
 
 class bcolors:
@@ -47,7 +47,7 @@ def logo():
        | |/ _ \| '__| |  _| '_ \ / _ \/ __| __|
        | | (_) | |  | |_| | | | | (_) \__ \ |_
        |_|\___/|_|   \____|_| |_|\___/|___/\__|
-	v3.0.3 - github.com/SusmithKrishnan/torghost
+	Modified by DeEn - github.com/deen666/torghost
 
     """
     print bcolors.ENDC
@@ -61,8 +61,7 @@ def usage():
     -r    --switch      Request new tor exit node
     -x    --stop        Stop Torghost
     -h    --help        Print this help and exit
-    -u    --update      check for update
-
+    
     """
     sys.exit()
 
@@ -70,7 +69,7 @@ def usage():
 def ip():
     while True:
         try:
-            ipadd = get(API_DOMAIN+'/ip').text
+            ipadd = get(API_DOMAIN+'/ip.php').text
         except:
             continue
         break
@@ -195,26 +194,6 @@ def switch_tor():
     print t() + ' Fetching current IP...'
     print t() + ' CURRENT IP : ' + bcolors.GREEN + ip() + bcolors.ENDC
 
-def check_update():
-    print t() + ' Checking for update...'
-    newversion= get(API_DOMAIN+'/latestversion').json()    
-    if newversion['version'] != VERSION:
-        print t() +  bcolors.GREEN + ' New update available' + bcolors.ENDC
-        
-        yes = {'yes','y', 'ye', ''}
-        no = {'no','n'}
-
-        choice = raw_input(bcolors.BOLD + "Would you like to download latest version and build from Git repo? [Y/n]" + bcolors.ENDC).lower()
-        if choice in yes:
-            os.system('cd /tmp && git clone  https://github.com/SusmithKrishnan/torghost')
-            os.system('cd /tmp/torghost && sudo ./build.sh')
-        elif choice in no:
-            print t() +" Update abotred by user"
-        else:
-            print "Please respond with 'yes' or 'no'"
-    else:
-        print t() + " Torghost is up to date!"    
-
 
 def main():
     check_root()
@@ -235,8 +214,6 @@ def main():
             stop_torghost()
         elif o in ('-r', '--switch'):
             switch_tor()
-        elif o in ('-u', '--update'):
-            check_update()   
         else:
             usage()
 
